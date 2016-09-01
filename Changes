@@ -1,7 +1,7 @@
 Revision history for Perl extension RPi::DHT11
 
-1.00 UNREL
-        - GPIO pin mode is the default
+0.07_03 2016-09-01
+        - GPIO pin mode is enforced
         - add ability to share pin modes with RPi::WiringPi seamlessly
         - we can now be setup() before, or after RPi::WiringPi, we'll share the
           pin mode whoever set up first

@@ -58,12 +58,12 @@ purposes only.
 
 Not available to Perl.
 
-=head2 sanity()
+=head2 setup()
 
-    void sanity();
+    void setup();
 
 If we're on a system that isn't a Raspberry Pi, things break. We call this in
-C<new()>, and if sanity checks fail, we exit (unless in RDE_NOBOARD_TEST
+C<new()>, and if setup checks fail, we exit (unless in RDE_NOBOARD_TEST
 environment variable is set to true).
 
 Called only from the C<new()> method.

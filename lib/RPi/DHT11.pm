@@ -17,7 +17,7 @@ sub new {
     my $self = bless {}, $class;
     $self->_pin($pin);
 
-    setup();
+    sanity();
 
     return $self;
 }
@@ -61,7 +61,7 @@ Raspberry Pi
 
     use RPi::DHT11;
 
-    my $pin = 26;
+    my $pin = 18;
 
     my $env = RPi::DHT11->new($pin);
 
@@ -71,10 +71,13 @@ Raspberry Pi
 =head1 DESCRIPTION
 
 This module is an interface to the DHT11 temperature/humidity sensor when
-connected to a Raspberry Pi's GPIO pins.
+connected to a Raspberry Pi's GPIO pins. We use the BCM GPIO pin numbering
+scheme.
 
-Due to the near-realtime access requirements of reading the input pin of the
-sensor, the core of this module is written in XS (C).
+If you create an L<RPi::WiringPi> object before creating an object in this
+class, you can set up with the C<RPi::WiringPi> object with whichever pin
+numbering scheme you choose, and this module will follow suit. Likewise, if you
+create an object of this class first, C<RPi::WiringPi> will use BCM GPIO mode.
 
 This module requires the L<wiringPi|http://wiringpi.com/> library to be
 installed, and uses WiringPi's GPIO pin numbering scheme (see C<gpio readall>
@@ -88,7 +91,7 @@ Parameters:
 
     $pin
 
-Mandatory. Pin number for the DHT11 sensor's DATA pin..
+Mandatory. BCM GPIO pin number for the DHT11 sensor's DATA pin..
 
 =head2 temp('f')
 
