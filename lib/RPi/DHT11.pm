@@ -90,17 +90,17 @@ Parameters:
 
 Mandatory. Pin number for the DHT11 sensor's DATA pin (values are 0-40).
 
-=head2 temp($f)
+=head2 temp('f')
 
-Fetches the current temperature (in Celcius).
+Fetches the current temperature.
 
 Returns an integer of the temperature, in celcius by default.
 
 Parameters:
 
-    $f
+    'f'
 
-Send in the string char C<'f'> to receive the temp in Farenheit.
+Optional: Send in the string char C<'f'> to receive the temp in Farenheit.
 
 =head2 humidity
 
