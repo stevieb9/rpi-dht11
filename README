@@ -102,8 +102,8 @@ C FUNCTIONS
     EnvData struct containing the temp and humidity float values.
 
     If for any reason the poll of the DHT11 sensor fails (eg: the CRC is
-    incorrect for the data), both temp and humidity, we will loop and block
-    until valid data is retrieved.
+    incorrect for either temp or humidity), we will loop and block until
+    valid data is retrieved.
 
  noboard_test()
 
