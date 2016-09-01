@@ -88,13 +88,13 @@ Parameters:
 
     $pin
 
-Mandatory. Pin number for the DHT11 sensor's DATA pin (values are 0-40).
+Mandatory. Pin number for the DHT11 sensor's DATA pin..
 
 =head2 temp('f')
 
 Fetches the current temperature.
 
-Returns an integer of the temperature, in celcius by default.
+Returns an integer of the temperature, in Celcius by default.
 
 Parameters:
 
@@ -106,7 +106,7 @@ Optional: Send in the string char C<'f'> to receive the temp in Farenheit.
 
 Fetches the current humidity.
 
-Returns the humidity as either an integer of the current humidity level.
+Returns the current humidity percentage as an integer.
 
 =head2 cleanup
 
