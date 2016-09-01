@@ -32,7 +32,7 @@ METHODS
 
     Parameters:
 
-  $pin
+        $pin
 
     Mandatory. Pin number for the DHT11 sensor's DATA pin (values are
     0-40).
@@ -45,7 +45,7 @@ METHODS
 
     Parameters:
 
-  $f
+        $f
 
     Send in the string char 'f' to receive the temp in Farenheit.
 
@@ -60,70 +60,6 @@ METHODS
 
     Returns the pin back to default state if it's not already. Called
     automatically by DESTROY().
-
-C TYPEDEFS
-
- EnvData
-
-    Stores the temperature and humidity float values.
-
-        typedef struct env_data {
-            int temp;
-            int humidity;
-        } EnvData;
-
-C FUNCTIONS
-
- c_temp
-
-        int c_temp(int spin);
-
-    Called by the temp() method.
-
- c_humidity
-
-        int c_humidity(int spin);
-
-    Called by the humidity() method.
-
- c_cleanup
-
-        int c_cleanup(int spin, int tpin, int hpin);
-
-    Called by the cleanup() method, and is always called upon DESTROY().
-
- read_env()
-
-        EnvData read_env(int spin);
-
-    Not available to Perl.
-
-    Polls the pin in a loop until valid data is fetched, then returns an
-    EnvData struct containing the temp and humidity float values.
-
-    If for any reason the poll of the DHT11 sensor fails (eg: the CRC is
-    incorrect for either temp or humidity), we will loop and block until
-    valid data is retrieved.
-
- noboard_test()
-
-        bool noboard_test();
-
-    Checks whether the RDE_NOBOARD_TEST environment variable is set to a
-    true value. Returns true if so, and false if not. This bool is used for
-    testing purposes only.
-
-    Not available to Perl.
-
- sanity()
-
-        void sanity();
-
-    If we're on a system that isn't a Raspberry Pi, things break. We call
-    this in new(), and if sanity checks fail, we exit (unless in
-    RDE_NOBOARD_TEST environment variable is set to true).
-
-    Called only from the new() method.
 
 ENVIRONMENT VARIABLES
 
