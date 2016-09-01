@@ -1,5 +1,9 @@
 Revision history for Perl extension RPi::DHT11
 
+0.07_02 2016-09-01
+        - POD fixes and updates
+        - separated C functionality into its own POD doc
+
 0.07_01 2016-09-01
         - clone of RPi::DHT11::EnvControl with reduced functionality, as that
           module shouldn't do anything more than read the sensor (the said
