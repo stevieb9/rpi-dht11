@@ -17,7 +17,7 @@ sub new {
     my $self = bless {}, $class;
     $self->_pin($pin);
 
-    sanity();
+    setup();
 
     return $self;
 }
@@ -75,9 +75,11 @@ connected to a Raspberry Pi's GPIO pins. We use the BCM GPIO pin numbering
 scheme.
 
 If you create an L<RPi::WiringPi> object before creating an object in this
-class, you can set up with the C<RPi::WiringPi> object with whichever pin
-numbering scheme you choose, and this module will follow suit. Likewise, if you
-create an object of this class first, C<RPi::WiringPi> will use BCM GPIO mode.
+class, you can set up the C<RPi::WiringPi> object with whichever pin
+numbering scheme you choose, and this module will follow suit. Eg: if you
+set C<RPi::WiringPi> to C<wpi> pin scheme, we'll use it here as well. Note,
+though, that you MUST create the C<RPi::WiringPi> object before you create one
+of this class!
 
 This module requires the L<wiringPi|http://wiringpi.com/> library to be
 installed, and uses WiringPi's GPIO pin numbering scheme (see C<gpio readall>
@@ -133,6 +135,8 @@ return default (ie. non-live) data when in this mode.
 =head1 SEE ALSO
 
 - L<wiringPi|http://wiringpi.com/>
+- L<WiringPi::API>
+- L <RPi::WiringPi>
 
 =head1 AUTHOR
 

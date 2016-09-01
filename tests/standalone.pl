@@ -6,4 +6,6 @@ use RPi::DHT11;
 
 my $e = RPi::DHT11->new(18);
 
-say $e->temp;
+say $e->temp('f');
+
+

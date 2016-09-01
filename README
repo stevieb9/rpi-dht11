@@ -18,10 +18,11 @@ DESCRIPTION
     numbering scheme.
 
     If you create an RPi::WiringPi object before creating an object in this
-    class, you can set up with the `RPi::WiringPi' object with whichever pin
-    numbering scheme you choose, and this module will follow suit. Likewise,
-    if you create an object of this class first, `RPi::WiringPi' will use
-    BCM GPIO mode.
+    class, you can set up the `RPi::WiringPi' object with whichever pin
+    numbering scheme you choose, and this module will follow suit. Eg: if
+    you set `RPi::WiringPi' to `wpi' pin scheme, we'll use it here as well.
+    Note, though, that you MUST create the `RPi::WiringPi' object before you
+    create one of this class!
 
     This module requires the wiringPi library to be installed, and uses
     WiringPi's GPIO pin numbering scheme (see `gpio readall' at the command
@@ -68,7 +69,7 @@ ENVIRONMENT VARIABLES
     will return default (ie. non-live) data when in this mode.
 
 SEE ALSO
-    - wiringPi
+    - wiringPi - WiringPi::API - L <RPi::WiringPi>
 
 AUTHOR
     Steve Bertrand, <steveb@cpan.org<gt>

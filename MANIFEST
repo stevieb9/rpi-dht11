@@ -1,3 +1,4 @@
+C-documentation.pod
 Changes
 DHT11.xs
 lib/RPi/DHT11.pm
@@ -8,3 +9,5 @@ README
 t/00-load.t
 t/05-noboard.t
 t/10-bad_params.t
+tests/prior_setup.pl
+tests/standalone.pl

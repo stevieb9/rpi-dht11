@@ -1,10 +1,15 @@
 Revision history for Perl extension RPi::DHT11
 
 0.07_03 2016-09-01
-        - GPIO pin mode is enforced
+        - GPIO pin numbering scheme is enforced (but see below)
         - add ability to share pin modes with RPi::WiringPi seamlessly
-        - we can now be setup() before, or after RPi::WiringPi, we'll share the
-          pin mode whoever set up first
+        - we can now create an RPi::WiringPi object *BEFORE* creating one of
+          this class, and whatever numbering scheme you use there, we'll use
+          it as well(ie. if a RPi::WiringPi is set to use 'wpi' pin numbering
+          scheme, you'll need to send in the 'wpi' pin number into new() in
+          this module as well)
+        - POD updates, cleanup, fixes
+        - added a couple of tests scripts in tests/
 
 0.07_02 2016-09-01
         - POD fixes and updates
