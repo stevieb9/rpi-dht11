@@ -17,7 +17,7 @@ sub new {
     my $self = bless {}, $class;
     $self->_pin($pin);
 
-    sanity();
+    setup();
 
     return $self;
 }

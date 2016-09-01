@@ -12,6 +12,14 @@
 
 #define MAXTIMINGS  85
 
+//wiringPi setup modes
+
+#define RPI_MODE_WPI 0
+#define RPI_MODE_GPIO 1
+#define RPI_MODE_GPIO_SYS 2 // unused
+#define RPI_MODE_PHYS 3
+#define RPI_MODE_UNINIT -1
+
 typedef struct env_data {
     int temp;
     int humidity;
@@ -24,7 +32,7 @@ int c_humidity(int pin);
 int c_cleanup(int pin);
 
 bool noboard_test(); // unit testing with no RPi board
-bool sanity();
+bool setup();
 
 EnvData read_env(int pin){
     int data[5] = {0, 0, 0, 0, 0};
@@ -134,10 +142,23 @@ bool noboard_test(){
     return false;
 }
 
-bool sanity(){
+bool setup(){
+
     if (! noboard_test()){
-        if (wiringPiSetup() == -1)
-            exit(1);
+        int setupMode = -1;
+
+        if (getenv("RPI_PIN_MODE"))
+            setupMode = atoi(getenv("RPI_PIN_MODE"));
+
+        if (setupMode == -1){
+            if (wiringPiSetupGpio() == -1)
+                exit(1);
+        }
+        else {
+            char modeEnvVar[20];
+            sprintf(modeEnvVar, "RPI_PIN_MODE=%d", setupMode);
+            putenv(modeEnvVar);
+        }
     }
     return true;
 }
@@ -159,4 +180,4 @@ c_cleanup (pin)
 	int	pin
 
 bool
-sanity()
+setup()
