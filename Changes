@@ -1,0 +1,42 @@
+Revision history for Perl extension RPi::DHT11
+
+0.07    2016-09-01
+        - renamed module from RPi::DHT11::EnvControl, as this module shouldn't
+          do anything more than read the sensor
+        - removed all code that was outside of core read functionality
+        - simplified new() to accept a single integer pin number param
+        - modified temp() and humidity() to keep polling if the result is zero
+        - variable renaming
+
+0.06    2016-08-12
+        - POD updates
+        - c_temp() now returns an int for both temperature and humidity. The
+          temperature is returned as Celcius
+        - if 'f' is sent in as a single param to Perl's temp() function, it'll
+          return the temp in Farenheit. Otherwise, by default, we return
+          Celcius
+        - changed return type of temp() and humidity() to be ints
+
+0.05    2016-08-09
+        - added test files to MANIFEST
+        - updated examples/synopsis.pl with complete working example
+
+0.04    2016-08-09
+        - moved from functional interface to OO for keeping state and
+          better error management
+        - temp() now returns a 2 point float
+
+0.03    2016-08-09
+        - added status() which checks the status of a GPIO pin, and removed
+          that functionality from control()
+
+0.02    2016-08-09
+        - added temp(), humidity(), control(), cleanup() public functions
+        - added noboard_test() private function
+        - functionality for testing on a non Pi board implemented
+        - added initial test suite 
+
+0.01  Tue Aug  9 07:25:40 2016
+	- original version; created by h2xs 1.23 with options
+		-A -n RPi::DHT11::EnvControl
+
