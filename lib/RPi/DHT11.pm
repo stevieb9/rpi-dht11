@@ -86,7 +86,7 @@ at the command line).
 
 Parameters:
 
-=head3 $pin
+    $pin
 
 Mandatory. Pin number for the DHT11 sensor's DATA pin (values are 0-40).
 
@@ -98,7 +98,7 @@ Returns an integer of the temperature, in celcius by default.
 
 Parameters:
 
-=head3 $f
+    $f
 
 Send in the string char C<'f'> to receive the temp in Farenheit.
 
