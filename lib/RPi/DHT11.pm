@@ -4,7 +4,7 @@ use warnings;
 
 use Carp qw(croak);
 
-our $VERSION = '0.07_03';
+our $VERSION = '1.01';
 
 require XSLoader;
 XSLoader::load('RPi::DHT11', $VERSION);
@@ -134,9 +134,7 @@ return default (ie. non-live) data when in this mode.
 
 =head1 SEE ALSO
 
-- L<wiringPi|http://wiringpi.com/>
-- L<WiringPi::API>
-- L <RPi::WiringPi>
+- L<wiringPi|http://wiringpi.com/>, L<WiringPi::API>, L<RPi::WiringPi>
 
 =head1 AUTHOR
 

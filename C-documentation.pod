@@ -17,27 +17,29 @@ Stores the temperature and humidity float values.
 
 =head1 C FUNCTIONS
 
+C<pin> arguments must always be in their C<BCM GPIO> number scheme format.
+
 =head2 c_temp
 
-    int c_temp(int spin);
+    int c_temp(int pin);
 
-Called by the C<temp()> method.
+Called by the C<temp()> method. Returns the temperature in Celcius.
 
 =head2 c_humidity
 
-    int c_humidity(int spin);
+    int c_humidity(int pin);
 
-Called by the C<humidity()> method.
+Called by the C<humidity()> method. Returns the humidity as an integer.
 
 =head2 c_cleanup
 
-    int c_cleanup(int spin, int tpin, int hpin);
+    int c_cleanup(int pin);
 
 Called by the C<cleanup()> method, and is always called upon C<DESTROY()>.
 
 =head2 read_env()
 
-    EnvData read_env(int spin);
+    EnvData read_env(int pin);
 
 Not available to Perl.
 
@@ -65,6 +67,9 @@ Not available to Perl.
 If we're on a system that isn't a Raspberry Pi, things break. We call this in
 C<new()>, and if setup checks fail, we exit (unless in RDE_NOBOARD_TEST
 environment variable is set to true).
+
+This function has been configured to call C<wiringPi>'s C<wiringPiSetupGpio()>
+function.
 
 Called only from the C<new()> method.
 

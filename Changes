@@ -1,6 +1,6 @@
 Revision history for Perl extension RPi::DHT11
 
-0.07_03 2016-09-01
+1.00    2016-09-01
         - GPIO pin numbering scheme is enforced (but see below)
         - add ability to share pin modes with RPi::WiringPi seamlessly
         - we can now create an RPi::WiringPi object *BEFORE* creating one of
