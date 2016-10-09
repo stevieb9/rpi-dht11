@@ -10,7 +10,7 @@ require XSLoader;
 XSLoader::load('RPi::DHT11', $VERSION);
 
 sub new {
-    my ($class, $pin) = @_;
+    my ($class, $pin, $debug) = @_;
 
     croak "you must supply a pin number\n" if ! defined $pin;
 
@@ -18,6 +18,10 @@ sub new {
     $self->_pin($pin);
 
     setup();
+
+    defined $debug
+        ? c_debug($debug)
+        : c_debug(0);
 
     return $self;
 }
@@ -94,6 +98,10 @@ Parameters:
     $pin
 
 Mandatory. BCM GPIO pin number for the DHT11 sensor's DATA pin..
+
+    $debug
+
+Optional: Bool. True, C<1> to enable debug output, False, C<0> to disable.
 
 =head2 temp('f')
 

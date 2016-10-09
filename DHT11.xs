@@ -25,12 +25,14 @@ typedef struct env_data {
     int humidity;
 } EnvData;
 
+int debug = 0;
+
 EnvData read_env(int pin);
 
 int c_temp(int pin);
 int c_humidity(int pin);
 int c_cleanup(int pin);
-
+int c_debug(int flag);
 bool noboard_test(); // unit testing with no RPi board
 bool setup();
 
@@ -79,8 +81,8 @@ EnvData read_env(int pin){
     if ((j >= 40) &&
          (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF))){
 
-         // printf( "Humidity = %d.%d %% Temperature = %d.%d *C (%.1f *F)\n",
-         //       data[0], data[1], data[2], data[3], f );
+         //printf( "Humidity = %d.%d %% Temperature = %d.%d *C (%.1f *F)\n",
+         //data[0], data[1], data[2], data[3], f );
 
         int t = data[2];
         int h = data[0];
@@ -98,6 +100,9 @@ EnvData read_env(int pin){
 int c_temp(int pin){
     // get & return temperature
 
+    if (debug)
+        printf("DHT11 exec temp\n");
+
     if (noboard_test())
         return 0;
 
@@ -107,12 +112,23 @@ int c_temp(int pin){
     while (data == -1 && data != 0){
         env_data = read_env(pin);
         data = env_data.temp;
+        if (data == -1){
+            sleep(1);
+        }
+        if (debug)
+            printf("temp data: %d\n", data);
     }
+    if (debug)
+        printf("temp: %d\n", env_data.temp);
+
     return env_data.temp;
 }
 
 int c_humidity(int pin){
     // get & return humidity
+
+    if (debug)
+        printf("DHT11 exec humidity\n");
 
     if (noboard_test())
         return 0;
@@ -122,8 +138,16 @@ int c_humidity(int pin){
 
     while (data == -1 && data != 0){
         env_data = read_env(pin);
+        if (data == -1){
+            sleep(1);
+        }
         data = env_data.humidity;
+        if (debug)
+            printf("humidity data: %d\n", data);
     }
+    if (debug)
+        printf("humidity: %d\n", env_data.humidity);
+
     return env_data.humidity;
 }
 
@@ -142,6 +166,11 @@ bool noboard_test(){
     return false;
 }
 
+int c_debug(int flag){
+    debug = flag;
+    return debug;
+}
+     
 bool setup(){
 
     if (! noboard_test()){
@@ -178,6 +207,10 @@ c_humidity (pin)
 int
 c_cleanup (pin)
 	int	pin
+
+int
+c_debug (flag)
+    int flag
 
 bool
 setup()

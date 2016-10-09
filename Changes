@@ -1,5 +1,12 @@
 Revision history for Perl extension RPi::DHT11
 
+1.01 UNREL
+        - added a sleep(1); in c_temp() and c_humidity() to wait one second
+          before retrying a fetch of valid sensor data
+        - added c_debug() and a debug flag. If set in the new() method as the
+          second param, we'll enable debugging in the XS code to print to
+          STDOUT what's happening internally in the fetch loops
+
 1.00    2016-09-01
         - GPIO pin numbering scheme is enforced (but see below)
         - add ability to share pin modes with RPi::WiringPi seamlessly
