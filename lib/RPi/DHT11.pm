@@ -91,7 +91,7 @@ at the command line).
 
 =head1 METHODS
 
-=head2 new($pin)
+=head2 new($pin, $debug)
 
 Parameters:
 

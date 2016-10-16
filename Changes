@@ -1,6 +1,6 @@
 Revision history for Perl extension RPi::DHT11
 
-1.01 UNREL
+1.01    2016-10-16
         - added a sleep(1); in c_temp() and c_humidity() to wait one second
           before retrying a fetch of valid sensor data
         - added c_debug() and a debug flag. If set in the new() method as the
