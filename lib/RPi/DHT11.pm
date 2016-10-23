@@ -27,7 +27,16 @@ sub new {
 }
 sub temp {
     my ($self, $want) = @_;
-    my $temp = c_temp($self->_pin);
+
+    # periodically, we get a strange return from the sensor,
+    # where the temp is ~490. This is a dirty check to avoid
+    # that
+
+    my $temp = -100;
+
+    until ($temp > -100 && $temp < 100){
+        $temp = c_temp($self->_pin);
+    }
 
     if (defined $want && $want =~ /f/i){
         $temp = $temp * 9 / 5 + 32;
@@ -36,7 +45,15 @@ sub temp {
 }
 sub humidity {
     my $self = shift;
-    return c_humidity($self->_pin);
+
+    # same sanity check as temp()
+
+    my $humidity = -1;
+
+    until ($humidity > -1 && $humidity < 101){
+        $humidity = c_humidity($self->_pin);
+    }
+    return $humidity;
 }
 sub cleanup {
     my $self = shift;
