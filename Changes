@@ -1,5 +1,10 @@
 Revision history for Perl extension RPi::DHT11
 
+1.03    2017-04-02
+        - no functional or documentation changes
+        - add Test::More build requirement of version 1.302078. This allows us
+          to build/pass tests down to 5.8.9 
+
 1.02    2016-10-23
         - add sanity checking in temp() and humidity() to combat against one-off
           rogue values that are way out of range (fixes #1)
