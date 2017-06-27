@@ -1,6 +1,8 @@
 Revision history for Perl extension RPi::DHT11
 
-1.03    2017-04-02
+1.04 UNREL
+
+1.03    2017-06-27
         - no functional or documentation changes
         - add Test::More build requirement of version 1.302078. This allows us
           to build/pass tests down to 5.8.9 
