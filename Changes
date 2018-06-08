@@ -1,5 +1,8 @@
 Revision history for Perl extension RPi::DHT11
 
+1.05 UNREL
+        -
+
 1.04    2018-06-09
         - no functional changes
         - ensure checks and bounds are performed before running tests. Some CPAN
