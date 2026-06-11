@@ -1,7 +1,10 @@
 Revision history for Perl extension RPi::DHT11
 
 1.05 UNREL
-        -
+        - Fixed undefined behavior in DHT11.xs setup(): RPI_PIN_MODE was
+          re-stamped with putenv() of a stack buffer, leaving environ pointing
+          at a dead frame after return; now uses setenv(), which copies its
+          arguments
 
 1.04    2018-06-09
         - no functional changes
