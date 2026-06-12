@@ -5,6 +5,12 @@ Revision history for Perl extension RPi::DHT11
           re-stamped with putenv() of a stack buffer, leaving environ pointing
           at a dead frame after return; now uses setenv(), which copies its
           arguments
+        - The test suite board gate is now RPI_BOARD (ecosystem-wide rename
+          from PI_BOARD); the old name is no longer honored
+        - Makefile.PL's wiringPi presence check is restored as a real gate
+          (its exit had been commented out, sacrificing CPAN testers' NA
+          behavior) and can be bypassed with RPI_DIST_RELEASE=1 so release
+          tarballs can be cut on non-Pi machines
 
 1.04    2018-06-09
         - no functional changes
