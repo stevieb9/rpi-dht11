@@ -1,7 +1,10 @@
 Revision history for Perl extension RPi::DHT11
 
 1.06 UNREL
-    -
+    - Replaced the inline wiringPi presence check in Makefile.PL with the
+      family-canonical RPi::Const::BuildCheck::wiringpi_build_check() (via
+      CONFIGURE_REQUIRES), which also adds the minimum-version check the
+      presence-only guard lacked; missing/too-old wiringPi exits NA, not FAIL
 
 1.05    2026-06-12
         - Fixed undefined behavior in DHT11.xs setup(): RPI_PIN_MODE was

@@ -2,18 +2,21 @@ use strict;
 use warnings;
 use ExtUtils::MakeMaker;
 
-# RPI_DIST_RELEASE allows cutting release tarballs on non-Pi machines by
-# bypassing the wiringPi presence check below. Without it, missing wiringPi
-# exits before WriteMakefile so CPAN testers report NA, not FAIL (the exit
-# was previously commented out, which sacrificed the NA behavior)
-
-if (! $ENV{RPI_DIST_RELEASE}){
-    if (! -f '/usr/include/wiringPi.h' && ! -f '/usr/local/include/wiringPi.h'){
-        print "wiringPi is not installed and RPI_DIST_RELEASE is not set, " .
-              "exiting...\n";
-        exit;
-    }
-}
+# The wiringPi presence + version guard is the family-canonical check in
+# RPi::Const::BuildCheck (pulled in via CONFIGURE_REQUIRES below). It honours
+# RPI_DIST_RELEASE and exits 0 with a message before WriteMakefile when
+# wiringPi is missing or too old, so CPAN testers report NA, not FAIL.
+eval {
+    require RPi::Const::BuildCheck;
+    RPi::Const::BuildCheck::wiringpi_build_check();
+    1;
+} or do {
+    # No RPi::Const::BuildCheck (a bare `perl Makefile.PL` with no CPAN client
+    # to honour CONFIGURE_REQUIRES). Stay NA-safe: exit 0 unless releasing.
+    print "RPi::Const (the build-check dependency) is not installed; install " .
+          "it first, or set RPI_DIST_RELEASE to skip the wiringPi check.\n";
+    exit 0 if ! $ENV{RPI_DIST_RELEASE};
+};
 
 WriteMakefile(
     NAME              => 'RPi::DHT11',
@@ -35,6 +38,9 @@ WriteMakefile(
                 web => 'https://github.com/stevieb9/rpi-dht11',
             },
         },
+    },
+    CONFIGURE_REQUIRES => {
+        'RPi::Const' => '1.07',
     },
     BUILD_REQUIRES => {
         'Test::More' => 1.302078,
