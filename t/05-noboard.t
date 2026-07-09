@@ -1,33 +1,23 @@
 use strict;
 use warnings;
-
-use RPi::DHT11;
 use Test::More;
 
-use constant {
-    DHT => 4,
-    TEMP => 1,
-    HUM => 5,
-};
+use RPi::DHT11;
 
-if (! $ENV{RPI_DHT11}){
-    plan(skip_all => "Skipping: RPI_DHT11 environment variable not set");
-}
-
-$ENV{RDE_NOBOARD_TEST} = 1;
+# HW-free: RDE_NOBOARD_TEST makes the whole lifecycle skip wiringPi - new()'s
+# setup(), the temp/humidity reads and cleanup() all return default data - so
+# this runs anywhere the module installs, with no Pi and no sensor attached.
+BEGIN { $ENV{RDE_NOBOARD_TEST} = 1; }
 
 my $mod = 'RPi::DHT11';
-my $env = $mod->new(DHT);
 
-# temp
+my $env = $mod->new(4);
+isa_ok $env, $mod;
 
-my $t = $env->temp;
-is $t, 0, "temp ok with no board";
-
-# humidity
-
-my $h = $env->humidity;
-is $h, 0, "humidity ok with no board";
+is $env->temp, 0, 'temp(): returns 0 in noboard mode';
+is $env->temp('f'), 32, "temp('f'): 0C converts to 32F";
+is $env->temp('F'), 32, "temp('F'): the 'f' flag is case-insensitive";
+is $env->humidity, 0, 'humidity(): returns 0 in noboard mode';
+is $env->cleanup, 0, 'cleanup(): returns 0 without touching wiringPi';
 
 done_testing();
-

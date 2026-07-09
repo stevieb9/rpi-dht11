@@ -5,6 +5,16 @@ Revision history for Perl extension RPi::DHT11
       family-canonical RPi::Const::BuildCheck::wiringpi_build_check() (via
       CONFIGURE_REQUIRES), which also adds the minimum-version check the
       presence-only guard lacked; missing/too-old wiringPi exits NA, not FAIL
+    - c_cleanup() (and thus cleanup()/DESTROY) now honors RDE_NOBOARD_TEST like
+      setup() and the temp/humidity reads already did, so the whole object
+      lifecycle runs without wiringPi in noboard mode
+    - Reworked the test gating into one coherent story: the HW-free tests
+      (t/00-load, t/05-noboard, t/10-bad_params) now run unconditionally via
+      RDE_NOBOARD_TEST instead of skipping behind RPI_BOARD/RPI_DHT11 (so the
+      HW-free coverage actually runs); RPI_DHT11 is reserved for live-sensor
+      tests. Added temp('f') Celsius-to-Fahrenheit coverage
+    - POD: removed the documented-but-unused RDE_HAS_BOARD env var and
+      clarified RDE_NOBOARD_TEST
 
 1.05    2026-06-12
         - Fixed undefined behavior in DHT11.xs setup(): RPI_PIN_MODE was

@@ -1,27 +1,12 @@
 use strict;
 use warnings;
-
-use RPi::DHT11;
 use Test::More;
 
-use constant {
-    DHT => 4,
-    TEMP => 1,
-    HUM => 5,
-};
+use RPi::DHT11;
 
-if (! $ENV{RPI_DHT11}){
-    plan(skip_all => "Skipping: RPI_DHT11 environment variable not set");
-}
-
-my $mod = 'RPi::DHT11';
-
-{ # bad params
-
-    my $env;
-
-    my $ok = eval { $env = $mod->new; 1; };
-    ok ! $ok, "new() dies with no pin param";
-}
+# HW-free: new() croaks on a missing pin before any setup, so this needs no gate.
+my $ok = eval { RPi::DHT11->new; 1 };
+ok ! $ok, 'new() dies with no pin param';
+like $@, qr/must supply a pin/, '  ...error ok';
 
 done_testing();

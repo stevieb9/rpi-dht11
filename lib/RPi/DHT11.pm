@@ -145,17 +145,12 @@ by C<DESTROY()>.
 
 =head1 ENVIRONMENT VARIABLES
 
-There are a couple of env vars to help prototype and run unit tests when not on
-a RPi board.
-
-=head2 RDE_HAS_BOARD
-
-Set to C<1> to tell the unit test runner that we're on a Pi.
-
 =head2 RDE_NOBOARD_TEST
 
-Set to C<1> to tell the system we're not on a Pi. Most methods/functions will
-return default (ie. non-live) data when in this mode.
+Set to C<1> to run without a Pi or a sensor. In this mode the whole lifecycle
+skips wiringPi: C<new()>'s setup, the temperature and humidity reads, and
+C<cleanup()> all return default (non-live) data. This is what the HW-free unit
+tests use, so they run anywhere the module installs.
 
 =head1 SEE ALSO
 

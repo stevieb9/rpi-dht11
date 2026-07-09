@@ -154,6 +154,9 @@ int c_humidity(int pin){
 int c_cleanup(int pin){
     // reset the pin to default status
 
+    if (noboard_test())
+        return 0;
+
     digitalWrite(pin, LOW);
     pinMode(pin, INPUT);
 
